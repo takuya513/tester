@@ -6,8 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 
 import mergeSort.*;
 import quickSort.*;
-import sort.QuickMergeSort;
-import sort.Sort;
+import sort.*;
 import tools.*;
 
 public class Tester {
@@ -16,10 +15,47 @@ public class Tester {
 	public static void main(String args[]) throws InterruptedException {
 		sc = new Scanner(System.in);
 
-		sortChecer();
+		//sortChecer();
 		//intSorting();
 
 		//doubleSorting();
+		stringSorting();
+	}
+
+
+	public static void stringSorting(){
+
+		int length = 10000;
+
+		MyString[] stringArray = new MyString[length];
+		String[] data2 = MyArrayUtil.randomStringArray(stringArray.length);
+		for(int i = 0;i < stringArray.length;i++)
+			stringArray[i] = new MyString(data2[i]);
+		
+		//MyArrayUtil.print(stringArray);
+		Sort<MyString> qs6 = new QuickSort6<MyString>();
+		Sort<MyString> qms = new QuickMergeSort<MyString>();//修正
+		
+		MyString[] stringArray2 = Arrays.copyOf(stringArray, stringArray.length);
+		MyString[] stringArray3 = Arrays.copyOf(stringArray, stringArray.length);
+		
+		long qmsStart = System.currentTimeMillis();
+		qms.sort(stringArray);
+		long qmsEnd = System.currentTimeMillis();
+		
+		long qs6Start = System.currentTimeMillis();
+		qs6.sort(stringArray2);
+		long qs6End = System.currentTimeMillis();
+		
+		long Start = System.currentTimeMillis();
+		Arrays.sort(stringArray);
+		long End = System.currentTimeMillis();
+		//MyArrayUtil.print(stringArray);
+		
+		System.out.println("Arrays Sort time         :"+(End - Start));
+		System.out.println("QuickMerge time          :"+(qmsEnd - qmsStart));
+		System.out.println("Paralle Quick Sort6 time :"+(qs6End- qs6Start));
+
 	}
 
 	public static void sortChecer(){
@@ -114,7 +150,7 @@ public class Tester {
 	public static void intSortingCheck(int t){
 
 		int length = t;
-		
+
 		MyInteger[] array = new MyInteger[length];
 		int[] data = ArrayUtil.randomIntArray(array.length); //乱数
 
@@ -128,11 +164,12 @@ public class Tester {
 		Sort<MyInteger> qs6 = new QuickSort6<MyInteger>();
 		Sort<MyInteger> pms = new ParallelMergeSort<MyInteger>();//修正
 		Sort<MyInteger> qms = new QuickMergeSort<MyInteger>();
+		Sort<MyInteger> qms_2 = new QuickMergeSort_2<MyInteger>();
 
 
 
 		long start10 = System.currentTimeMillis();
-		qms.sort(array10);
+		qms_2.sort(array10);
 		long stop10 = System.currentTimeMillis();
 		//MyArrayUtil.print(array10);
 		System.out.println("length : "+t);
