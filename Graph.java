@@ -38,7 +38,7 @@ public class Graph extends JFrame{
 		long[][] times = sortTimes();
 		
 		DefaultCategoryDataset data = new DefaultCategoryDataset();
-		String[] series = {"qs", "qs2"," qsfj","qs6","ms","pms","Arrays","ns","pms"};
+		String[] series = {"qs", "qs2"," qsfj","qs6","ms","pms","Arrays","ns","qms"};
 		String[] category = {"1000", "10000", "100000"};
 		
 		for(int i = 0;i<3;i++){
